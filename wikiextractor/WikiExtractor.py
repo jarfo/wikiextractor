@@ -60,7 +60,7 @@ import os.path
 import re  # TODO use regex when it will be standard
 import sys
 from io import StringIO
-from multiprocessing import Queue, Process, cpu_count
+from multiprocessing import Queue, Process, cpu_count, set_start_method
 from timeit import default_timer
 
 from .extract import Extractor, ignoreTag, define_template, acceptedNamespaces
@@ -69,6 +69,12 @@ from .extract import Extractor, ignoreTag, define_template, acceptedNamespaces
 
 # Program version
 __version__ = '3.0.5'
+
+##
+# Explicitly set start method to 'fork' since this isn't always the default
+# in later versions of Python.
+if sys.version_info >= (3, 4):
+    set_start_method('fork')
 
 ##
 # Defined in <siteinfo>
